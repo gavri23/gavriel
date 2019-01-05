@@ -162,86 +162,45 @@ return sum;
 
 }
 private static int longestSlope  (int [][] mat, int num,int i,int j){
-int sum = 1;
-int max = 0;
-
-if(i<mat[0].length-1 && mat[i+1][j] == mat[i][j] - num){
-   
-   
-   return sum + longestSlope(mat,num,i+1,j); 
-
-    
-}
-if(i==mat[0].length-1 && mat[i][j+1] == mat[i][j] - num){
-   
-   
-    return sum + longestSlope(mat,num,i,j+1) ;
-}
-if(j<mat.length-1 && mat[i][j] == mat[i][j] - num ){
-    
-     
-    return  sum + longestSlope(mat,num,i,j+1) ; 
-}
-if(j==mat.length-1 && mat[i][j] == mat[i][j+1] - num){
-   
-   
-    return sum + longestSlope(mat,num,i+1,j) ;
-}
-if( i!=0 && mat[i-1][j] == mat[i][j] - num ){
-  
-    
- return sum + longestSlope(mat,num,i-1,j);
-}    
-if( j!=0 && mat[i][j-1] == mat[i][j] + num){
-  
-  
-  return sum + longestSlope(mat,num,i,j-1);
-}
-if(sum>max){
-
-    max=sum;
-
-}
-if(i == mat[0].length && j == mat.length){
-    return sum;
-}
-return max;
-
+	int max = 0;
+	if(i<mat[0].length-1 && mat[i+1][j] == mat[i][j] - num){ //down
+		int down = longestSlope(mat,num,i+1,j); ////// DON'T RETURN!!!
+		max = if(down>max) down: max;
+	}
+	if(i==mat[0].length-1 && mat[i][j+1] == mat[i][j] - num){// Why condidion on i if not changed???? also compare wrong side
+		int left = longestSlope(mat,num,i,j+1);
+		max = if(left>max) left: max;
+	}
+	if(j<mat.length-1 && mat[i][j] == mat[i][j] - num ){ ///Ma ze???? It's the same place 
+		return longestSlope(mat,num,i,j+1) ; // No higayon
+	}
+	if(j==mat.length-1 && mat[i][j] == mat[i][j+1] - num){ 
+		int right = longestSlope(mat,num,i+1,j);
+		max = if(right>max) right: max;
+	}
+	if( i!=0 && mat[i-1][j] == mat[i][j] - num ){   
+		int up = longestSlope(mat,num,i-1,j);
+		max = if(up>max) up: max
+	}    
+	if( j!=0 && mat[i][j-1] == mat[i][j] + num){// lama shov?
+		int left = longestSlope(mat,num,i,j-1);
+	}
+	return max+1;
 }
 
-
-
-
-
-
-
-private static void loop(int mat [][],int num, int i, int j){
-
-
-
-
-
-
-
-if(i<mat.length-1){
-System.out.println(mat[i][j]);
-longestSlope(mat,num,i,j);    
-    
-loop(mat,num,i+1,j);          
-
-}
-if(i==mat.length){
-i = 0;
-
-loop(mat,num,i,j+1);
-}
-if(i == mat[0].length-1 && j == mat.length-1){
- return;   
-}
-
-
-
-
+private static void loop(int mat [][],int num, int i, int j){// why void and not int??? how do you get answer?
+	if(i<mat.length-1){// why skip testing the last row???
+		System.out.println(mat[i][j]);
+		longestSlope(mat,num,i,j);        
+		loop(mat,num,i+1,j);      
+	}
+	if(i==mat.length){
+		i = 0;
+		loop(mat,num,i,j+1); //why not just loop(mat,num,0,j+1);
+	}
+	if(i == mat[0].length-1 && j == mat.length-1){
+		return; // return ma????
+	}
 }   
 
 //4
