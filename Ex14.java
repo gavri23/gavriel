@@ -100,15 +100,12 @@ public class Ex14
                 start = end;
                 System.out.println("between " + start + " and " + end);
                 return true;
-
             }
             else  if(a[end] > num)
             {
                 end++;
                 start = end;
                 sum = 0;
-
-
             }
             else if(num == sum)
             {
@@ -116,11 +113,6 @@ public class Ex14
                 return true;
 
             }
-
-
-
-
-
             else if(num > sum)
             {
 
@@ -184,11 +176,16 @@ public class Ex14
     private static int loop(int mat [][], int num, int i, int j)
     {
         int currentMax = longestSlope(mat, num, i, j)
-        if(j < mat[i].length - 1){
+                         if(j < mat[i].length - 1)
+        {
             return Math.max(currentMax, loop(mat, num, i, j + 1));
-        }else if (i < mat.length - 1) {
+        }
+        else if (i < mat.length - 1)
+        {
             return Math.max(currentMax, loop(mat, num, i + 1, 0));
-        }else{
+        }
+        else
+        {
             return currentMax;
         }
     }
@@ -261,13 +258,5 @@ public class Ex14
         System.out.println("Test: Checking method 'howManySorted' on n=3 and max=2");
         System.out.println("Expected result = 4, Student result = "
                            + Ex14.howManySorted(3, 2) + "\n");
-
-
-
-
     }
-
-
-
-
 }

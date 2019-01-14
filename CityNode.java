@@ -17,39 +17,39 @@ public class CityNode
     {
         _city = c;
         _next = null;
-        
     }
-    public CityNode(City c, CityNode n){
-    
-    _city = c;
-    _next = n;
+    public CityNode(City c, CityNode n)
+    {
+        _city = c;
+        _next = n;
     }
-    public CityNode (CityNode c){
-    _next = c;
-    
-    } 
-    public City getCity() {
-    return _city;
-    
-    }
-    public CityNode getNext(){
-    return _next;
-    } 
-    public void setCity (City c){
-    _city = c;
-    
-    }
-    public void setNext( CityNode next){
-    _next = next;
-    
-    }
-    
-}   
+    public CityNode (CityNode c)
+    {
+        _next = c;
 
-    
-    
-    
-    
-    
-   
+    }
+    public City getCity()
+    {
+        return _city;
+    }
+    public CityNode getNext()
+    {
+        return _next;
+    }
+    public void setCity (City c)
+    {
+        _city = c;
+    }
+    public void setNext( CityNode next)
+    {
+        _next = next;
+    }
+}
+
+
+
+
+
+
+
 
