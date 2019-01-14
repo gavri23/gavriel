@@ -30,10 +30,8 @@ public class Country
         {
             count++;
             temp = temp.getNext();
-
         }
         return count;
-
     }
     /**
         WHERE IS TIUD????
@@ -48,7 +46,7 @@ public class Country
             */
         City cityToAdd = new City(cityName, xCenter, yCenter, xStation, yStation, numOfResidents, noOfNeighborhoods);
         CityNode cityToAddNode = new CityNode();
-        cityToAddNode.setCity(cityToAdd);
+        cityToAddNode.setCity(cityToAdd); // why not use constructor with City?
 
         if(_head == null)
         {
@@ -62,10 +60,10 @@ public class Country
             {
                 return false;
             }
-
             cityPtr = cityPtr.getNext();
-
         }
+
+        // BUG!!! cityPtr is null... condition will throw Nill Point Exception (maybe try kiiping the last City that is not null)
         if(cityPtr.getCity().getCityName().equals(cityName)) //if the last city equals to the city we want to add
         {
             return false;
@@ -83,10 +81,8 @@ public class Country
         {
             sumOfResidents += temp.getNumOfResidents();
             temp = temp.getNext();
-
         }
         return sumOfResidents;
-
     }
 
     public double longestDistance()
@@ -101,12 +97,12 @@ public class Country
         }
         while(temp1 != null)
         {
+            // BUG!!! need to rest temp2 here
             while(temp2 != null)
             {
                 if(maxDistance < temp1.getCityCenter().distance(temp2.getCityCenter()))
                 {
                     maxDistance = temp1.getCityCenter().distance(temp2.getCityCenter());
-
                 }
                 temp2 = temp2.getNext();
             }
@@ -139,7 +135,8 @@ public class Country
         {
             if(currentCity.getCityCenter().isUnder(temp.getCityCenter()))
             {
-                listOfNorthenCities +=   "\n";
+                // why 2 new line????
+                listOfNorthenCities += "\n";
                 listOfNorthenCities += temp.toString() + "\n";
             }
             temp = temp.getNext();
@@ -149,10 +146,7 @@ public class Country
         {
             return "There is no cities north of" + currentCity;
         }
-
-        return "The city north of" +  " " + currentCity.getCityName() + " " + "are:" + "\n" + listOfNorthenCities;//the final list with the norther cities
-
-
+        return "The city north of " + currentCity.getCityName() + " are:\n" + listOfNorthenCities;//the final list with the norther cities
     }
 
     public City southernmostCity()
@@ -165,13 +159,13 @@ public class Country
         }
         while(temp != null)
         {
+            // maybe BUG. what if next is null???
             if(temp.getCityCenter().isAbove(temp.getNext()))
             {
                 southestCity = temp.getNext();
             }
             temp = temp.getNext();
         }
-
         return southestCity;
     }
 }
