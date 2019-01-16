@@ -15,14 +15,14 @@ public class Country
     /**
      * Constructor for objects of class Country1
      */
-    public Country1(String CountryName)
+    public Country(String CountryName)
     {
         // initialise instance variables
         _countryName = CountryName;
         _head = null;
 
     }
-    private int getNumOfCities()
+    public int getNumOfCities()
     {
         CityNode temp = _head;
         int count = 0;
@@ -45,7 +45,7 @@ public class Country
                    }
             */
         City cityToAdd = new City(cityName, xCenter, yCenter, xStation, yStation, numOfResidents, noOfNeighborhoods);
-        CityNode cityToAddNode = new CityNode();
+        CityNode cityToAddNode = new CityNode(cityToAdd);
         cityToAddNode.setCity(cityToAdd); // why not use constructor with City?
 
         if(_head == null)
@@ -88,7 +88,7 @@ public class Country
     public double longestDistance()
     {
         CityNode temp1 = _head;
-        CityNode temp2 = _head.getNext();
+        
         int numOfCities;
         double maxDistance = 0;
         if(getNumOfCities(numOfCities) < 2)
@@ -98,6 +98,7 @@ public class Country
         while(temp1 != null)
         {
             // BUG!!! need to rest temp2 here
+            CityNode temp2 = _head.getNext();
             while(temp2 != null)
             {
                 if(maxDistance < temp1.getCityCenter().distance(temp2.getCityCenter()))
@@ -135,9 +136,9 @@ public class Country
         {
             if(currentCity.getCityCenter().isUnder(temp.getCityCenter()))
             {
-                // why 2 new line????
-                listOfNorthenCities += "\n";
-                listOfNorthenCities += temp.toString() + "\n";
+                
+                
+                listOfNorthenCities +="\n" + temp.toString() + "\n";
             }
             temp = temp.getNext();
         }
@@ -168,5 +169,128 @@ public class Country
         }
         return southestCity;
     }
-}
+    public String getCountryName(){
+    
+        return _countryName;
+    
+    }
+    private boolean addCity(City newCityToAdd){
+    
+        CityNode newCityAddNode = new CityNode(newCityToAdd);
+        
+    if(_head == null){
+        _head = newCityAddNode;
+        }
+    CityNode temp = _head;
+    while(temp.getNext()!=null){
+    
+        temp = temp.getNext();
+    
+    }
+    
+    temp.setNext(newCityAddNode);
+    return true;
+    }
+    
+    public Country getCities(){//need to write
+    
+    Country copyOfCountry = new Country (_countryName);
+    City copyOfCity = new City(copyOfCity);
+    CityNode copyOfCityNode = new CityNode(copyOfCity);
+    copyOfCityNode.setCity(copyOfCity);
+    
+   
+    CityNode newPtr = new CityNode (_head);
+    if(_head == null){
+        copyOfCountry = null;
+    }
+    while(newPtr != null){
+         copyOfCountry.addCity(new City(newPtr.getCity()));
+         
+         newPtr=newPtr.getNext();
+      }
+    return copyOfCountry;     
+    }     
+    
+    
+    
+    
+    
+    private CityNode getCityNode(String cityName) {
+    CityNode findCity =  _head;
+    
+    if(findCity == null){
+        return null;
+    }
+    while(findCity != null){
+        if(findCity.getCityName().equals(cityName)){
+             findCity = findCity;
+            }
+          findCity = findCity.getNext();  
+            }         
+    return findCity;       
+    
+    } 
+    
+     
+       
+    
+  
+    
+    public City unifyCities(String cityName1,String cityName2){//need to write
+    String unitedCity = cityName1 +"-" + cityName2;//the new name of the united city
+    CityNode c1 = getCityNode(cityName1);//finds the first City
+    CityNode c2 = getCityNode(cityName2);//finds the second City
+    long newNumOfResidents = c1.getNumOfResidents() + c2.getNumOfResidents();//the number of residents in the united city
+    int newNumOfNeighborhoods = c1.getNoOfNeighborhoods() + c2.getNoOfNeighborhoods();//the number of neighborhoods in the united city
+    double newCityCenterX = (c1.getCityCenter().getX() + c2.getCityCenter().getX())/2;//the x coordinate of the new center of the united city
+    double newCityCenterY = (c1.getCityCenter().getY() + c2.getCityCenter().getY())/2;//the y coordinate of the new center of the united city
+    Point newCityStation;//a variable that gets the point of the new central station of the united city
+
+    if(c1.getCentralStation().isLeft(c2.getCentralStation())){
+    
+        newCityStation = new Point(c1.getCentralStation());
+    }
+    else{
+        newCityStation = new Point(c2.getCentralStation());
+    }
+    City newCity = new City(unitedCity,newCityCenterX,newCityCenterY,newCityStation.getX(),newCityStation.getY(),newNumOfResidents,newNumOfNeighborhoods);
+     // the united city and her new details   
+    CityNode unitedCityNode = new CityNode(newCity); 
+    
+    City city1 = new City(c1.get
+    if(c1.getNumOfResidents()>=c2.getNumOfResidents()){
+    
+    
+    
+    
+    }
+        
+        
+        
+        
+    
+    }
+    
+    public String toString(){
+    CityNode cityPtr = _head;
+     
+        if(cityPtr==null){
+
+    return "There are no cities in this country";
+    }
+
+    String listCountryCities = "";// a variable that holds the details of the cities
+    
+    while(cityPtr!=null){
+        listCountryCities += "\n" + cityPtr.toString() + "\n";//adds to the variable the detail of the city
+        cityPtr.getNext();
+       
+    }
+
+    return "Cities of myCountry: \n" + listCountryCities;
+     }
+  
+    }
+
 
